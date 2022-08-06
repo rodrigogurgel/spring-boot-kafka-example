@@ -1,0 +1,33 @@
+# Kafka
+spring:
+  kafka:
+    producer:
+      client-id: spring-boot-kafka-example-producer
+      bootstrap-servers: localhost:29092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+
+    properties:
+      schema:
+        registry:
+          url: http://0.0.0.0:8085
+
+      specific:
+        avro:
+          reader: true
+
+    consumer:
+      client-id: spring-boot-kafka-example-consumer
+      bootstrap-servers: localhost:29092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      auto-offset-reset: latest
+
+auto:
+  create:
+    topics:
+      enable: true
+
+kafka:
+  order:
+    topic-name: order.topic
